@@ -9,7 +9,14 @@
 	"compatibility_date": "2025-07-23",
 	"observability": {
 		"enabled": true
-	}
+	},
+	"d1_databases": [
+		{
+			"binding": "YOGA_BINDING",
+			"database_name": "yoga-di",
+			"database_id": "dcf06ac6-1d6f-453f-84cb-d1ff3f72d27e"
+		}
+	]
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
