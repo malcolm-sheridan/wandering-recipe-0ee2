@@ -8,8 +8,24 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+// export default {
+// 	async fetch(request, env, ctx) {
+// 		return new Response('Hello World! Yep for real this time!');
+// 	},
+// };
+
 export default {
-	async fetch(request, env, ctx) {
-		return new Response('Hello World! Yep for real this time!');
-	},
+  async fetch(request, env, ctx) {
+    const data = {
+      message: "Hello World!",
+      detail: "Yep for real this time!"
+    };
+    return new Response(
+      JSON.stringify(data),
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
+  },
 };
+
