@@ -16,16 +16,39 @@
 
 export default {
   async fetch(request, env, ctx) {
-    const data = {
-      message: "Hello World!",
-      detail: "Yep for real this time!"
-    };
-    return new Response(
-      JSON.stringify(data),
-      {
-        headers: { 'Content-Type': 'application/json' }
-      }
-    );
+
+	const url = new URL(request.url);
+	var data = {};
+
+    if (url.pathname === "/hello") {
+	  	// Return a JSON response with a message
+		data = {
+			message: "Hello World!",
+			detail: "Yep for real this time!"
+		};
+    }
+
+    if (url.pathname === "/goodbye") {
+      	// Return a JSON response with a message
+		data = {
+			message: "Goodbye!",
+			detail: "Yep for real this time!"
+		};
+    }
+
+	if(!data.message) {
+		// If no message is set, return a 404
+		return new Response(JSON.stringify({error: "Not found"}), {
+			status: 404,
+			headers: { "Content-Type": "application/json" }
+		});
+	}
+
+	return new Response(
+		JSON.stringify(data),
+		{
+			headers: { 'Content-Type': 'application/json' }
+		}
+	);
   },
 };
-
