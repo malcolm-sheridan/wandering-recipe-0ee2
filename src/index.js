@@ -38,9 +38,9 @@ export default {
 
 	if(url.pathname === "/yoga") {
 		const result = await env.YOGA_BINDING.prepare(
-			"SELECT * FROM [Customer]",
+			"SELECT * FROM Customers",
 		).run();
-		
+
 		return new Response(
 			JSON.stringify(result), 
 			{
