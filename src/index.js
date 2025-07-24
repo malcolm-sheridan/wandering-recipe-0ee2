@@ -8,11 +8,7 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-// export default {
-// 	async fetch(request, env, ctx) {
-// 		return new Response('Hello World! Yep for real this time!');
-// 	},
-// };
+const yogaManager = require('./yogaManager');
 
 export default {
   async fetch(request, env, ctx) {
@@ -37,15 +33,25 @@ export default {
     }
 
 	if(url.pathname === "/yoga") {
-		const result = await env.YOGA_BINDING.prepare(
-			"SELECT * FROM Customers",
-		).all();
+		// const result = await env.YOGA_BINDING.prepare(
+		// 	"SELECT * FROM Customers",
+		// ).all();
 
-		return new Response(
-			JSON.stringify(result.results), 
-			{
-				headers: { 'Content-Type': 'application/json' }
-			});
+		// if(!result || !result.results) {
+		// 	// If no results are found, return a 404
+		// 	return new Response(JSON.stringify({error: "No results found"}), {
+		// 		status: 200,		
+		// 		headers: { "Content-Type": "application/json" }
+		// 	});
+		// }
+
+		// return new Response(
+		// 	JSON.stringify(result.results), 
+		// 	{
+		// 		headers: { 'Content-Type': 'application/json' }
+		// 	}
+		// );
+		return yogaManager.getCustomers();
 	}
 
 	if(!data.message) {
