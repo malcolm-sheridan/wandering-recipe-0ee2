@@ -36,6 +36,18 @@ export default {
 		};
     }
 
+	if(url.pathname === "/yoga") {
+		const result = await env.YOGA_BINDING.prepare(
+			"SELECT * FROM [Customer]",
+		).run();
+		
+		return new Response(
+			JSON.stringify(result), 
+			{
+				headers: { 'Content-Type': 'application/json' }
+			});
+	}
+
 	if(!data.message) {
 		// If no message is set, return a 404
 		return new Response(JSON.stringify({error: "Not found"}), {
