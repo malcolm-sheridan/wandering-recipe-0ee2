@@ -51,7 +51,7 @@ export default {
 		// 		headers: { 'Content-Type': 'application/json' }
 		// 	}
 		// );
-		return yogaManager.getCustomers();
+		return yogaManager.getCustomers(env);
 	}
 
 	if(!data.message) {

@@ -4,7 +4,7 @@ function greet(name) {
   return `Hello, ${name}! Welcome to the yoga API.`;
 }
 
-const getCustomers = async () => {
+const getCustomers = async (env) => {
 	const result = await env.YOGA_BINDING.prepare(
 			"SELECT * FROM Customers",
 		).all();
