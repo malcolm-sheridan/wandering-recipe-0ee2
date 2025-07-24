@@ -39,7 +39,7 @@ export default {
 	if(url.pathname === "/yoga") {
 		const result = await env.YOGA_BINDING.prepare(
 			"SELECT * FROM Customers",
-		).run();
+		).all();
 
 		return new Response(
 			JSON.stringify(result), 
