@@ -42,7 +42,7 @@ export default {
 		).all();
 
 		return new Response(
-			JSON.stringify(result), 
+			JSON.stringify(result.results), 
 			{
 				headers: { 'Content-Type': 'application/json' }
 			});
