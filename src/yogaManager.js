@@ -4,6 +4,24 @@ function greet(name) {
   return `Hello, ${name}! Welcome to the yoga API.`;
 }
 
+function helloWorld() {
+	let data = {
+		message: "Hello World!",
+		detail: "Yep for real this time!"
+	};
+
+	dataResponse(data);
+}
+
+function dataResponse(object) {
+	return new Response(
+		JSON.stringify(object),
+		{
+			headers: { 'Content-Type': 'application/json' }
+		}
+	);
+}
+
 const getCustomers = async (env) => {
 	const result = await env.YOGA_BINDING.prepare(
 			"SELECT * FROM Customers",
@@ -12,18 +30,13 @@ const getCustomers = async (env) => {
 		if(!result || !result.results) {
 			// If no results are found, return a 404
 			return new Response(JSON.stringify({error: "No results found"}), {
-				status: 200,		
+				status: 200,
 				headers: { "Content-Type": "application/json" }
 			});
 		}
 
-		return new Response(
-			JSON.stringify(result.results), 
-			{
-				headers: { 'Content-Type': 'application/json' }
-			}
-		);
+		dataResponse(result.results);
 };
 
 // Export the function to make it accessible from other files
-module.exports = { greet, getCustomers };
+module.exports = { greet, helloWorld, getCustomers };

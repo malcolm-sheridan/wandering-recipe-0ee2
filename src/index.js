@@ -25,11 +25,7 @@ export default {
 	var data = {};
 
     if (url.pathname === "/hello") {
-	  	// Return a JSON response with a message
-		data = {
-			message: "Hello World!",
-			detail: "Yep for real this time!"
-		};
+	  	return yogaManager.helloWorld();
     }
 
     if (url.pathname === "/goodbye") {
