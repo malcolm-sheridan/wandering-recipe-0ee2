@@ -1,14 +1,5 @@
 // src/yogaManager.js
 
-function dataResponse(object) {
-	return new Response(
-		JSON.stringify(object),
-		{
-			headers: { 'Content-Type': 'application/json' }
-		}
-	);
-}
-
 const getYogaVideosByAgeRange = async (env, ageRange) => {
 	const result = await env.YOGA_BINDING.prepare(
 			`
@@ -33,7 +24,12 @@ const getYogaVideosByAgeRange = async (env, ageRange) => {
 			});
 		}
 
-		dataResponse(result.results);
+        return new Response(
+            JSON.stringify(result.results),
+            {
+                headers: { 'Content-Type': 'application/json' }
+            }
+        );		
 };
 
 // Export the function to make it accessible from other files
