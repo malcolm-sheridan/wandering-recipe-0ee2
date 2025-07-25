@@ -13,6 +13,14 @@ const yogaManager = require('./yogaManager');
 export default {
   async fetch(request, env, ctx) {
 
+	const apiKey = request.headers.get("x-api-key");
+	if (apiKey !== env.API_TOKEN) {
+		return new Response(JSON.stringify({error: "Unauthorized"}), {
+			status: 401,
+			headers: { "Content-Type": "application/json" }
+		});
+	}
+
 	const url = new URL(request.url);
 	var data = {};
 
@@ -33,24 +41,6 @@ export default {
     }
 
 	if(url.pathname === "/yoga") {
-		// const result = await env.YOGA_BINDING.prepare(
-		// 	"SELECT * FROM Customers",
-		// ).all();
-
-		// if(!result || !result.results) {
-		// 	// If no results are found, return a 404
-		// 	return new Response(JSON.stringify({error: "No results found"}), {
-		// 		status: 200,		
-		// 		headers: { "Content-Type": "application/json" }
-		// 	});
-		// }
-
-		// return new Response(
-		// 	JSON.stringify(result.results), 
-		// 	{
-		// 		headers: { 'Content-Type': 'application/json' }
-		// 	}
-		// );
 		return yogaManager.getCustomers(env);
 	}
 
