@@ -35,15 +35,22 @@ export default {
 			message: "Goodbye!",
 			detail: "Yep for real this time!"
 		};
+
+		return new Response(
+		JSON.stringify(data),
+		{
+			headers: { 'Content-Type': 'application/json' }
+		}
+	);
     }
 
 	if(url.pathname === "/yoga") {
-		return yogaManager.getCustomers(env);
+		yogaManager.getCustomers(env);
 	}
 
 	if (url.pathname === "/yoga/videos") {
 		const ageRange = url.searchParams.get("ageRange");
-		return yogaVideoManager.getYogaVideosByAgeRange(env, ageRange);
+		yogaVideoManager.getYogaVideosByAgeRange(env, ageRange);
 	}
 
 	if(!data.message) {
@@ -54,11 +61,6 @@ export default {
 		});
 	}
 
-	return new Response(
-		JSON.stringify(data),
-		{
-			headers: { 'Content-Type': 'application/json' }
-		}
-	);
+	
   },
 };
