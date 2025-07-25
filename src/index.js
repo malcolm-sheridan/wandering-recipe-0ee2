@@ -14,13 +14,13 @@ const yogaVideoManager = require('./yogaVideoManager');
 export default {
   async fetch(request, env, ctx) {
 
-	// const apiKey = request.headers.get("x-api-key");
-	// if (apiKey !== env.API_TOKEN) {
-	// 	return new Response(JSON.stringify({error: "Unauthorized"}), {
-	// 		status: 401,
-	// 		headers: { "Content-Type": "application/json" }
-	// 	});
-	// }
+	const apiKey = request.headers.get("x-api-key");
+	if (apiKey !== env.API_TOKEN) {
+		return new Response(JSON.stringify({error: "Unauthorized"}), {
+			status: 401,
+			headers: { "Content-Type": "application/json" }
+		});
+	}
 
 	const url = new URL(request.url);
 	var data = {};
@@ -37,11 +37,11 @@ export default {
 		};
 
 		return new Response(
-		JSON.stringify(data),
-		{
-			headers: { 'Content-Type': 'application/json' }
-		}
-	);
+			JSON.stringify(data),
+			{
+				headers: { 'Content-Type': 'application/json' }
+			}
+		);
     }
 
 	if(url.pathname === "/yoga") {
@@ -49,29 +49,8 @@ export default {
 	}
 
 	if (url.pathname === "/yoga/videos") {
-		const ageRange = url.searchParams.get("ageRange");
-		console.log("Age Range:", ageRange);
-		// data = {
-		// 	ageRange: ageRange
-		// };
-
-		// return new Response(
-		// 	JSON.stringify(data),
-		// 	{
-		// 		headers: { 'Content-Type': 'application/json' }
-		// 	}
-		// );
+		const ageRange = url.searchParams.get("ageRange");			
 		return yogaVideoManager.getYogaVideosByAgeRange(env, ageRange);
-	}
-
-	// if(!data.message) {
-	// 	// If no message is set, return a 404
-	// 	return new Response(JSON.stringify({error: "Not found"}), {
-	// 		status: 404,
-	// 		headers: { "Content-Type": "application/json" }
-	// 	});
-	// }
-
-	
-  },
+	}	
+  }
 };
