@@ -9,6 +9,7 @@
  */
 
 const yogaManager = require('./yogaManager');
+const yogaVideoManager = require('./yogaVideoManager');
 
 export default {
   async fetch(request, env, ctx) {
@@ -38,6 +39,11 @@ export default {
 
 	if(url.pathname === "/yoga") {
 		return yogaManager.getCustomers(env);
+	}
+
+	if (url.pathname === "/yoga/videos") {
+		const ageRange = url.searchParams.get("ageRange");
+		return yogaVideoManager.getYogaVideosByAgeRange(env, ageRange);
 	}
 
 	if(!data.message) {
