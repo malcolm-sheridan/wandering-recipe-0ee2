@@ -29,7 +29,7 @@ const getYogaVideosByAgeRange = async (env, ageRange) => {
             {
                 headers: { 'Content-Type': 'application/json' }
             }
-        );		
+        );
 };
 
 // Export the function to make it accessible from other files

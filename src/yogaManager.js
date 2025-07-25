@@ -4,14 +4,13 @@ function greet(name) {
   return `Hello, ${name}! Welcome to the yoga API.`;
 }
 
-function helloWorld() {
-	let data = {
-		message: "Hello World!",
-		detail: "Yep for real this time!"
-	};
-
-	dataResponse(data);
+const helloWorld = async () => {
+    return dataResponse({
+        message: "Hello World!",
+        detail: "Yep for real this time!"
+    });
 }
+
 
 function dataResponse(object) {
 	return new Response(
